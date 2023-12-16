@@ -12,8 +12,8 @@ services:
     env_file:
       - .env  # Specify the env_file here
     volumes:
-      - ./appdata:/app/data
-      - ./letsencrypt:/app/letsencrypt
+      - ../nginx-proxy-manager-app-data/appdata:/app/data
+      - ../nginx-proxy-manager-letsencrypt-data/letsencrypt:/app/letsencrypt
 
   db:
     image: mariadb:latest
@@ -22,7 +22,7 @@ services:
     env_file:
       - .env  # Specify the env_file here
     volumes:
-      - ../nginx-proxy-manager/data/mysql:/var/lib/mysql
+      - ../nginx-proxy-manager-db-data/data/mysql:/var/lib/mysql
 
 networks:
   default:
