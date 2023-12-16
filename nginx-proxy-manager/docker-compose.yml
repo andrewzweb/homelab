@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    env_file:
+      - .env  # Specify the env_file here
+    volumes:
+      - ./appdata:/app/data
+      - ./letsencrypt:/app/letsencrypt
+
+  db:
+    image: mariadb:latest
+    container_name: npm-db
+    restart: always
+    env_file:
+      - .env  # Specify the env_file here
+    volumes:
+      - ../nginx-proxy-manager/data/mysql:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
