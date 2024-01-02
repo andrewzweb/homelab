@@ -10,7 +10,7 @@ services:
       - "81:81"
       - "443:443"
     env_file:
-      - .env  # Specify the env_file here
+      - .env
     volumes:
       - ../nginx-proxy-manager-app-data/appdata:/app/data
       - ../nginx-proxy-manager-letsencrypt-data/letsencrypt:/app/letsencrypt
@@ -20,7 +20,7 @@ services:
     container_name: npm-db
     restart: always
     env_file:
-      - .env  # Specify the env_file here
+      - .env
     volumes:
       - ../nginx-proxy-manager-db-data/data/mysql:/var/lib/mysql
 

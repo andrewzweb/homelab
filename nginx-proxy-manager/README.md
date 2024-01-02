@@ -9,14 +9,14 @@ Before running create .env for example
 DB_MYSQL_HOST=db
 DB_MYSQL_PORT=3306
 DB_MYSQL_USER=npm-homelab
-DB_MYSQL_PASSWORD=npm_password
+DB_MYSQL_PASSWORD=npm_password  # change this
 DB_MYSQL_NAME=npm
 
 # MariaDB
-MYSQL_ROOT_PASSWORD=root_password
+MYSQL_ROOT_PASSWORD=root_password    # change this
 MYSQL_DATABASE=npm
-MYSQL_USER=npm
-MYSQL_PASSWORD=npm_password
+MYSQL_USER=npm-homelab
+MYSQL_PASSWORD=npm_password  # change this
 ```
 
 ## Step 2. Creeate network
@@ -32,5 +32,7 @@ docker network create nginx
 When go to your IP and port http://your_domain:81
 
 > Default Administrator User
-> Email:    admin@example.com
-> Password: changeme
+> Email:    
+> admin@example.com
+> Password: 
+> changeme
