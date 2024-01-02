@@ -25,6 +25,5 @@ services:
       - ../nginx-proxy-manager-db-data/data/mysql:/var/lib/mysql
 
 networks:
-  default:
-    external:
-      name: nginx-proxy
+  nginx-proxy:
+      driver: bridge
