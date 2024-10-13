@@ -26,8 +26,10 @@ services:
       - "9099:8080"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - PIPELINE_BACKEND_URL=http://open-webui:3001  # Directly linking to the open-webui service
+      - PIPELINE_BACKEND_URL=http://open-webui:3001
       - NETWORKING_ALLOWED=True
+      # Add antropic API to openwebui
+      - PIPELINES_URLS="https://github.com/open-webui/pipelines/blob/main/examples/pipelines/providers/anthropic_manifold_pipeline.py"
     depends_on:
       - open-webui
     volumes:

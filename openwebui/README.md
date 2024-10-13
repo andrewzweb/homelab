@@ -89,6 +89,16 @@ This will pull the necessary Docker images and start the services in detached mo
 Open WebUI: Visit http://localhost:3001 to access the open-webui service.
 Pipelines: The pipelines service runs on http://localhost:9099 and depends on the open-webui service.
 
+### 6. Connect openwebui and pipelines
+
+Connect to Open WebUI:
+
+1. Navigate to the Admin Panel > Settings > Connections section in Open WebUI.
+2. When you're on this page, you can press the + button to add another connection.
+3. Set the API URL to http://localhost:9099 and the API key to 0p3n-w3bu!.
+
+Once you've added your pipelines connection and verified it, you will see an icon appear within the API Base URL field for the added connection. When hovered over, the icon itself will be labeled Pipelines. Your pipelines should now be active.
+
 ## Services
 
 ### Open WebUI
