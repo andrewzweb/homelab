@@ -13,7 +13,7 @@ services:
       - .env
     volumes:
       - ../nginx-proxy-manager-app-data/appdata:/app/data
-      - ../nginx-proxy-manager-letsencrypt-data/letsencrypt:/app/letsencrypt
+      - ../nginx-proxy-manager-letsencrypt-data/letsencrypt:/etc/letsencrypt
 
   db:
     image: mariadb:latest
