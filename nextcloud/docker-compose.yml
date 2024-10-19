@@ -7,7 +7,7 @@ services:
     volumes:
       - ../nextcloud_app_data:/var/www/html
     ports:
-      - "6060:80"
+      - "10060:80"
     environment:
       - MYSQL_HOST=db
       - MYSQL_DATABASE=${MYSQL_DATABASE}
