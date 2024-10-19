@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  nextcloud:
+    image: nextcloud:latest
+    restart: always
+    volumes:
+      - ../nextcloud_app_data:/var/www/html
+    ports:
+      - "6060:80"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - REDIS_HOST=redis
+      - TRUSTED_PROXIES=172.16.0.0/12
+      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_TRUSTED_DOMAINS}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - nextcloud_network
+
+  db:
+    image: mariadb:10.5
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - ../nextcloud_mariadb_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+    networks:
+      - nextcloud_network
+
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - nextcloud_network
+
+networks:
+  nextcloud_network:
+    driver: bridge
