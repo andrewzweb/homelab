@@ -21,15 +21,13 @@ services:
     restart: always
     volumes:
       - ../nextcloud_app_data:/var/www/html
-    ports:
-      - "6060:80"
     environment:
       - MYSQL_HOST=db
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - REDIS_HOST=redis
-      - TRUSTED_PROXIES=172.16.0.0/12
+      - TRUSTED_PROXIES=172.16.0.0/12,${NGINX_PROXY_MANAGER_IP}
       - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_TRUSTED_DOMAINS}
     depends_on:
       - db
@@ -72,6 +70,7 @@ MYSQL_PASSWORD=your_strong_password
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
 NEXTCLOUD_TRUSTED_DOMAINS=your_domain.com
+NGINX_PROXY_MANAGER_IP=your_nginx_proxy_manager_ip
 ```
 
 Replace the placeholder values with your own secure passwords and domain.
