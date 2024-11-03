@@ -21,6 +21,9 @@ cd gitlab
 ### 2. Create .env file in the root directory with the following content:
 
 ```
+GITLAB_HTTP_PORT=80
+GITLAB_HTTPS_PORT=443
+GITLAB_SSH_PORT=22
 GITLAB_REGISTRATION_TOKEN=your_registration_token_here
 GITLAB_EXTERNAL_URL=http://gitlab
 ```
@@ -37,15 +40,21 @@ mkdir -p ../gitlab-data/config ../gitlab-data/logs ../gitlab-data/data ../gitlab
 cp config.toml ../gitlab-runner-data/config/config.toml
 ```
 
-### 5. When run gitlab need take root password what generated
+### 5. Create docker network
+
+```sh
+docker network create gitlab-network
+```
+
+### 6. When run gitlab need take root password what generated
 
 ```sh
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
-### 6. After create own user and aprove use root user
+### 7. After create own user and aprove use root user
 
-### 7. Go to Setting -> CI&CD -> Runners
+### 8. Go to Setting -> CI&CD -> Runners
 
 ## Troubleshouting
 
