@@ -1,0 +1,47 @@
+version: '3'
+
+networks:
+  gitlab-network:
+    external: true
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: gitlab
+    hostname: 'gitlab'
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${GITLAB_EXTERNAL_URL}'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - '80:80'    # Web interface
+      - '443:443'  # HTTPS
+      - '22:22'    # Git over SSH
+    volumes:
+      - '../gitlab-data/config:/etc/gitlab'
+      - '../gitlab-data/logs:/var/log/gitlab'
+      - '../gitlab-data/data:/var/opt/gitlab'
+    networks:
+      - gitlab-network
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    restart: always
+    depends_on:
+      gitlab:
+        condition: service_healthy
+    environment:
+      - REGISTRATION_TOKEN=${GITLAB_REGISTRATION_TOKEN}
+      - CI_SERVER_URL=${GITLAB_EXTERNAL_URL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - '../gitlab-runner-data/config:/etc/gitlab-runner'
+    networks:
+      - gitlab-network
+
