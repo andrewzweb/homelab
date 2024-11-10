@@ -13,6 +13,7 @@ services:
       - WEBUI_AUTH=True
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - NETWORKING_ALLOWED=True
+      - USER_AGENT="open-webui/1.0"  # Added to set the USER_AGENT
     networks:
       - app-network
     security_opt:
@@ -28,8 +29,8 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PIPELINE_BACKEND_URL=http://open-webui:3001
       - NETWORKING_ALLOWED=True
-      # Add antropic API to openwebui
       - PIPELINES_URLS="https://github.com/open-webui/pipelines/blob/main/examples/pipelines/providers/anthropic_manifold_pipeline.py"
+      - USER_AGENT="pipelines/1.0"  # Added to set the USER_AGENT
     depends_on:
       - open-webui
     volumes:
